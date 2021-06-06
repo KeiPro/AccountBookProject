@@ -62,11 +62,12 @@
             android:text = "금액 : " />
 
         <EditText
+            android:id="@+id/ET_InputMoney"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textSize  = "20dp"
-            android:textColor = "#FFFFFF"
+            android:textColor = "#000000"
             android:hint="100000"/>
 
         <TextView
@@ -93,11 +94,12 @@
             android:text = "내용 : " />
 
         <EditText
+            android:id="@+id/ET_inputContents"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textSize  = "15dp"
-            android:textColor = "#FFFFFF"
+            android:textColor = "#000000"
             android:hint="커피"/>
     </LinearLayout>
 
@@ -138,6 +140,7 @@
             android:text="취소"/>
 
         <Button
+            android:id="@+id/inputPageConfirm"
             android:onClick="onClickConfirm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

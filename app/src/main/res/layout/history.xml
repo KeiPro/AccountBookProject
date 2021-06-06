@@ -5,11 +5,11 @@
     android:orientation="vertical">
 
     <Button
+        android:id="@+id/history"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginHorizontal="10dp"
-        android:id="@+id/history"
         android:text="미용실 비용 : -10000"/>
 
 </LinearLayout>
