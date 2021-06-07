@@ -9,13 +9,21 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
     private Button m_addHistory;
 
+    private TextView m_allInComing;
+    private TextView m_allExpenditure;
+    private TextView m_allBalance;
+
     public static final int addHistoryCode = 1001; /*다른 액티비티를 띄우기 위한 요청코드(상수)*/
+
+    public static final int incoming = 0; /*다른 액티비티를 띄우기 위한 요청코드(상수)*/
+    public static final int expenditure = 1; /*다른 액티비티를 띄우기 위한 요청코드(상수)*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +40,10 @@ public class MainActivity extends Activity {
                 startActivityForResult(intent, addHistoryCode);
             }
         });
+
+        m_allInComing = (TextView)findViewById(R.id.AllIncoming);
+        m_allExpenditure= (TextView)findViewById(R.id.AllExpenditure);
+        m_allBalance = (TextView)findViewById(R.id.AllBalance);
     }
 
     @Override
@@ -69,6 +81,26 @@ public class MainActivity extends Activity {
 
         Toast.makeText(MainActivity.this, "데이터 입력 성공.", Toast.LENGTH_LONG).show();
 
+        UpdateMainData(inputData);
+
         return true;
+    }
+
+    private void UpdateMainData(InputData inputData)
+    {
+        int prevAllIncoming = Integer.parseInt(m_allInComing.getText().toString());
+        int prevAllExpenditure = Integer.parseInt(m_allExpenditure.getText().toString());
+        int prevAllBalance = Integer.parseInt(m_allBalance.getText().toString());
+
+        if(inputData.reason == incoming)
+        {
+            m_allInComing.setText(String.valueOf(prevAllIncoming + inputData.money));
+            m_allBalance.setText(String.valueOf(prevAllBalance + inputData.money));
+        }
+        else
+        {
+            m_allExpenditure.setText(String.valueOf(prevAllExpenditure + inputData.money));
+            m_allBalance.setText(String.valueOf(prevAllIncoming - (prevAllExpenditure + inputData.money)));
+        }
     }
 }

@@ -12,7 +12,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
+import android.widget.RadioGroup;
 import android.widget.Toast;
+
+import androidx.annotation.IdRes;
 
 import java.io.Serializable;
 
@@ -21,10 +24,17 @@ public class InputHistory extends Activity {
     private Button m_popupMenuBtn;
     private Button m_confirmBtn;
 
+    private RadioGroup radioGroup;
+
+    private int reason = MainActivity.incoming;
+
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inputpage);
+
+        radioGroup = (RadioGroup) findViewById(R.id.radioGroup1);
+        radioGroup.setOnCheckedChangeListener(radioGroupButtonChangeListener);
 
         m_popupMenuBtn = (Button)findViewById(R.id.categoryBtn);
         m_confirmBtn = (Button)findViewById(R.id.inputPageConfirm);
@@ -38,8 +48,6 @@ public class InputHistory extends Activity {
                 if( inputData == null )
                     return;
 
-                Log.i(this.getClass().getName(), "들어오냐?");
-
                 Intent data = new Intent();
                 data.putExtra("InputData", inputData);
                 setResult(MainActivity.addHistoryCode, data);
@@ -48,6 +56,20 @@ public class InputHistory extends Activity {
             }
         });
     }
+
+    RadioGroup.OnCheckedChangeListener radioGroupButtonChangeListener = new RadioGroup.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
+            if(i == R.id.radioIncome){
+                reason = MainActivity.incoming;
+                Toast.makeText(InputHistory.this, "수입 버튼을 눌렸습니다.", Toast.LENGTH_SHORT).show();
+            }
+            else if(i == R.id.radioExpenditure){
+                reason = MainActivity.expenditure;
+                Toast.makeText(InputHistory.this, "지출 버튼을 눌렸습니다.", Toast.LENGTH_SHORT).show();
+            }
+        }
+    };
 
     public void onClickCancel(View v)
     {
@@ -63,7 +85,7 @@ public class InputHistory extends Activity {
         int money = Integer.parseInt(inputMoney.getText().toString());
         String contents = inputContents.getText().toString();
 
-        InputData inputData = new InputData(money, contents);
+        InputData inputData = new InputData(reason, money, contents);
 
         return inputData;
     }
