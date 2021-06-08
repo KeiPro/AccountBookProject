@@ -4,12 +4,42 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+<!--    <Button-->
+<!--        android:id="@+id/history_incoming"-->
+
+<!--        android:text="Button"-->
+<!--        android:textColor="#000000"-->
+<!--        android:textSize="20sp"-->
+
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginLeft = "20dp"-->
+<!--        android:layout_marginRight = "20dp"-->
+<!--        android:layout_marginTop = "20dp"-->
+<!--        android:background="@drawable/buttonshape_incoming"-->
+<!--        android:shadowColor="#A8A8A8"-->
+<!--        android:shadowDx="5"-->
+<!--        android:shadowDy="5"-->
+<!--        android:shadowRadius="5"-->
+<!--        />-->
+
     <Button
-        android:id="@+id/history"
+        android:id="@+id/history_expenditure"
+
+        android:text="Button"
+        android:textColor="#000000"
+        android:textSize="20sp"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginHorizontal="10dp"
-        android:text="미용실 비용 : -10000"/>
+        android:layout_marginLeft = "20dp"
+        android:layout_marginRight = "20dp"
+        android:layout_marginTop = "20dp"
+        android:background="@drawable/buttonshape_expenditure"
+        android:shadowColor="#A8A8A8"
+        android:shadowDx="5"
+        android:shadowDy="5"
+        android:shadowRadius="5"
+        />
 
 </LinearLayout>

@@ -1,14 +1,18 @@
 package com.example.accountbookproject;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import androidx.core.content.ContextCompat;
+
 public class History extends LinearLayout{
 
-    private Button myButton;
+    private Button incomingButton;
+    private Button expenditureButton;
 
     public History(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -26,12 +30,34 @@ public class History extends LinearLayout{
         inflater.inflate(R.layout.history,this,true);
     }
 
-    public void SetHistory(String contents, int money)
+    public void SetHistory(int reason, String contents, int money)
     {
-        myButton = (Button)findViewById(R.id.history);
+//        if(reason == MainActivity.incoming)
+//        {
+//            incomingButton = (Button)findViewById(R.id.history_incoming);
+//            String history = contents + " : " + money;
+//            incomingButton.setText(history);
+//        }
+//        else
+//        {
+            expenditureButton = (Button)findViewById(R.id.history_expenditure);
+            String history = contents + " : " + money;
+            expenditureButton.setText(history);
+//        }
 
-        String history = contents + " : " + money;
+//        myButton = (Button)findViewById(R.id.history);
+//
+//        String history = contents + " : " + money;
+//
+//        myButton.setText(history);
 
-        myButton.setText(history);
+//        if(reason == MainActivity.incoming)
+//        {
+//            myButton.setBackgroundColor(getContext().getResources().getColor(R.color.pastelPink));
+//        }
+//        else
+//        {
+//            myButton.setBackgroundColor(getContext().getResources().getColor(R.color.skyBlue));
+//        }
     }
 }

@@ -73,7 +73,7 @@ public class MainActivity extends Activity {
         InputData inputData = (InputData)intent.getSerializableExtra("InputData");
 
         History n_layout = new History(getApplicationContext());
-        n_layout.SetHistory(inputData.contents, inputData.money);
+        n_layout.SetHistory(inputData.reason, inputData.contents, inputData.money);
 
         LinearLayout layoutHistory = (LinearLayout)findViewById(R.id.layout_history);
 
