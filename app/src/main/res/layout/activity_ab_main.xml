@@ -6,7 +6,7 @@
 
     <LinearLayout
 
-        android:background="#FFFF00"
+        android:background="#0FAFF0"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -23,7 +23,7 @@
 
     <LinearLayout
 
-        android:background="#000000"
+        android:background="#5e7e9b"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:weightSum="3"

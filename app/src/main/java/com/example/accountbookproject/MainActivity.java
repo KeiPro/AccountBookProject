@@ -3,7 +3,9 @@ package com.example.accountbookproject;
 //https://m.blog.naver.com/eominsuk55/220227937851 : 액티비티 이동하는 부분.
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +13,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.List;
 
 public class MainActivity extends Activity {
 
@@ -20,8 +24,10 @@ public class MainActivity extends Activity {
     private TextView m_allExpenditure;
     private TextView m_allBalance;
 
-    public static final int addHistoryCode = 1001; /*다른 액티비티를 띄우기 위한 요청코드(상수)*/
+    private InputData m_saveInputData = null;
+    private List<InputData> m_savedHistoryList = null;
 
+    public static final int addHistoryCode = 1001; /*다른 액티비티를 띄우기 위한 요청코드(상수)*/
     public static final int incoming = 0; /*다른 액티비티를 띄우기 위한 요청코드(상수)*/
     public static final int expenditure = 1; /*다른 액티비티를 띄우기 위한 요청코드(상수)*/
 
@@ -30,20 +36,39 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ab_main);
 
-        Intent intent = new Intent(this, InputHistory.class);
+        MainActivityInit();
+    }
 
+    private void MainActivityInit()
+    {
+        LoadSavedData();
+        SetFindViewByID();
+        SetButtonForInputHistoryClass();
+    }
+
+    private void LoadSavedData()
+    {
+        SharedPreferences sharedPreferences = getSharedPreferences("HistoryData", Context.MODE_PRIVATE);
+
+    }
+
+    private void SetFindViewByID()
+    {
         m_addHistory = (Button)findViewById(R.id.btn_plusHistory);
-        m_addHistory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                startActivityForResult(intent, addHistoryCode);
-            }
-        });
-
         m_allInComing = (TextView)findViewById(R.id.AllIncoming);
         m_allExpenditure= (TextView)findViewById(R.id.AllExpenditure);
         m_allBalance = (TextView)findViewById(R.id.AllBalance);
+    }
+
+    private void SetButtonForInputHistoryClass()
+    {
+        Intent intent = new Intent(this, InputHistory.class);
+        m_addHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivityForResult(intent, addHistoryCode);
+            }
+        });
     }
 
     @Override
@@ -56,7 +81,10 @@ public class MainActivity extends Activity {
                 if(resultCode == RESULT_CANCELED)
                     return;
 
-                AddHistory(data);
+                if( AddHistory(data) )
+                {
+                    SaveData();
+                }
 
                 break;
 
@@ -66,14 +94,22 @@ public class MainActivity extends Activity {
         }
     }
 
+    private void SaveData()
+    {
+        SharedPreferences sharedPreferences = getSharedPreferences("HistoryData", Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit = sharedPreferences.edit();
+
+
+    }
+
     private boolean AddHistory(Intent data)
     {
         Intent intent = data;
 
-        InputData inputData = (InputData)intent.getSerializableExtra("InputData");
+        InputData m_saveInputData = (InputData)intent.getSerializableExtra("InputData");
 
         History n_layout = new History(getApplicationContext());
-        n_layout.SetHistory(inputData.reason, inputData.contents, inputData.money);
+        n_layout.SetHistory(m_saveInputData.reason, m_saveInputData.contents, m_saveInputData.money);
 
         LinearLayout layoutHistory = (LinearLayout)findViewById(R.id.layout_history);
 
@@ -81,7 +117,7 @@ public class MainActivity extends Activity {
 
         Toast.makeText(MainActivity.this, "데이터 입력 성공.", Toast.LENGTH_LONG).show();
 
-        UpdateMainData(inputData);
+        UpdateMainData(m_saveInputData);
 
         return true;
     }
