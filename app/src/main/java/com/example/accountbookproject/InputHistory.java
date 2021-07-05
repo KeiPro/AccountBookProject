@@ -62,11 +62,9 @@ public class InputHistory extends Activity {
         public void onCheckedChanged(RadioGroup radioGroup, @IdRes int i) {
             if(i == R.id.radioIncome){
                 reason = MainActivity.incoming;
-                Toast.makeText(InputHistory.this, "수입 버튼을 눌렸습니다.", Toast.LENGTH_SHORT).show();
             }
             else if(i == R.id.radioExpenditure){
                 reason = MainActivity.expenditure;
-                Toast.makeText(InputHistory.this, "지출 버튼을 눌렸습니다.", Toast.LENGTH_SHORT).show();
             }
         }
     };

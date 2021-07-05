@@ -36,10 +36,10 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ab_main);
 
-        MainActivityInit();
+        InitMainActivity();
     }
 
-    private void MainActivityInit()
+    private void InitMainActivity()
     {
         LoadSavedData();
         SetFindViewByID();
@@ -115,7 +115,9 @@ public class MainActivity extends Activity {
 
         layoutHistory.addView(n_layout);
 
-        Toast.makeText(MainActivity.this, "데이터 입력 성공.", Toast.LENGTH_LONG).show();
+        String saveSuccessText = "데이터 입력 성공! (저장된 시각 : " + m_saveInputData.Date + ")";
+
+        Toast.makeText(MainActivity.this, saveSuccessText, Toast.LENGTH_LONG).show();
 
         UpdateMainData(m_saveInputData);
 
