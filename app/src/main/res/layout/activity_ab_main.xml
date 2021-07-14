@@ -9,15 +9,32 @@
         android:background="#0FAFF0"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:weightSum="3"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width = "30dp"
+            android:layout_height = "wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:text = "전월"/>
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
+            android:gravity="center"
             android:layout_gravity="center"
-            android:textSize  = "30dp"
+            android:layout_weight="1"
+            android:textSize  = "28dp"
             android:textColor = "#000000"
-            android:text = "10월" />
+            android:text = "2021년 7월" />
+
+        <Button
+            android:layout_width = "30dp"
+            android:layout_height = "wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:text = "익월"/>
 
     </LinearLayout>
 
@@ -148,7 +165,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#CCCCCC">
 
         <LinearLayout
             android:id="@+id/layout_history"
